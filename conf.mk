@@ -1,4 +1,3 @@
 CC = c99
-CFLAGS = -g -O0
+CFLAGS = -g -Ofast
 LINK = $(CC)
-

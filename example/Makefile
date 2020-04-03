@@ -1,7 +1,6 @@
 .POSIX:
 .SUFFIXES: .o .c
 include ../conf.mk
-PREFIX = $(CHPREFIX)
 M_CFLAGS = -I../lib
 M_LDFLAGS = -L../lib -lquadtree
 
@@ -16,5 +15,5 @@ all: $M
 
 lint:; make CFLAGS='-Wall -Wextra -g -O2'
 
-.PHONY: clean lint install
+.PHONY: clean lint
 clean:; rm -f -- $M
