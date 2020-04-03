@@ -2,6 +2,8 @@
 
 quadtree implementation following [FinkelBentley]
 
+<p align="center"><img src="img/fig.svg"/></p>
+
 # Install
 
     (cd lib && make)
