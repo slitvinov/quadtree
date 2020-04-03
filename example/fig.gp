@@ -1,5 +1,5 @@
-set term svg
-set output "fig.svg"
+set term pngcairo
+set output "fig.png"
 set key off
 set size sq
 plot \
