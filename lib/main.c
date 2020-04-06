@@ -28,33 +28,40 @@ insert(struct Node *K, struct Node *R)
     return 0;
 }
 
+static int
+search(struct Node *P, double L, double R, double B, double T,
+       struct Region * region, void found(struct Node *))
+{
+    double X;
+    double Y;
+    struct Node **elm;
+
+    elm = P->elm;
+    X = P->x;
+    Y = P->y;
+    if (in_region(X, Y, region))
+        found(P);
+    if (elm[NE] != NULL && rectangle_overlaps_region(X, R, Y, T, region))
+      search(elm[NE], X, R, Y, T, region, found);
+    if (elm[NW] != NULL && rectangle_overlaps_region(L, X, Y, T, region))
+      search(elm[NW], L, X, Y, T, region, found);
+    if (elm[SW] != NULL && rectangle_overlaps_region(L, X, B, Y, region))
+      search(elm[SW], L, X, B, Y, region, found);
+    if (elm[SE] != NULL && rectangle_overlaps_region(X, R, B, Y, region))
+      search(elm[SE], X, R, B, Y, region, found);
+    return 0;
+}
+
 int
 regionsearch(struct Node *P, double L, double R, double B, double T,
              void found(struct Node *))
 {
-    double X;
-    double Y;
     struct Region region;
-    struct Node **elm;
-
     region.L = L;
     region.R = R;
     region.B = B;
     region.T = T;
-    elm = P->elm;
-    X = P->x;
-    Y = P->y;
-    if (in_region(X, Y, &region))
-        found(P);
-    if (elm[NE] != NULL && rectangle_overlaps_region(X, R, Y, T, &region))
-        regionsearch(elm[NE], L, R, B, T, found);
-    if (elm[NW] != NULL && rectangle_overlaps_region(L, X, Y, T, &region))
-        regionsearch(elm[NW], L, R, B, T, found);
-    if (elm[SW] != NULL && rectangle_overlaps_region(L, X, B, Y, &region))
-        regionsearch(elm[SW], L, R, B, T, found);
-    if (elm[SE] != NULL && rectangle_overlaps_region(X, R, B, Y, &region))
-        regionsearch(elm[SE], L, R, B, T, found);
-    return 0;
+    return search(P, L, R, B, T, &region, found);
 }
 
 struct Node *
