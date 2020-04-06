@@ -1,6 +1,6 @@
 # Introduction
 
-quadtree implementation following [FinkelBentley]
+Point Quadtrees implementation following [FinkelBentley]
 
 <p align="center"><img src="img/fig.svg"/></p>
 
