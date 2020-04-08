@@ -2,7 +2,7 @@
 #include "quadtree.h"
 
 enum { NE, NW, SW, SE };
-struct Region {
+struct Rectangle  {
     double L;
     double R;
     double B;
@@ -10,9 +10,10 @@ struct Region {
 };
 
 static int compare(struct Node *, struct Node *);
-static int in_region(double, double, struct Region *region);
-static int rectangle_overlaps_region(double, double, double, double,
-                                     struct Region *);
+
+static int in_rectangle(double, double, void *);
+static int rectangle_overlaps_rectangle(double, double, double, double,
+                                     void *);
 
 int
 insert(struct Node *K, struct Node *R)
@@ -30,7 +31,10 @@ insert(struct Node *K, struct Node *R)
 
 static int
 search(struct Node *P, double L, double R, double B, double T,
-       struct Region * region, void found(struct Node *))
+       void * region,
+       void found(struct Node *),
+       int (*in_region)(double, double, void *),
+       int (*rectangle_overlaps_region)(double, double, double, double, void *))
 {
     double X;
     double Y;
@@ -42,13 +46,13 @@ search(struct Node *P, double L, double R, double B, double T,
     if (in_region(X, Y, region))
         found(P);
     if (elm[NE] != NULL && rectangle_overlaps_region(X, R, Y, T, region))
-      search(elm[NE], X, R, Y, T, region, found);
+      search(elm[NE], X, R, Y, T, region, found, in_region, rectangle_overlaps_region);
     if (elm[NW] != NULL && rectangle_overlaps_region(L, X, Y, T, region))
-      search(elm[NW], L, X, Y, T, region, found);
+      search(elm[NW], L, X, Y, T, region, found, in_region, rectangle_overlaps_region);
     if (elm[SW] != NULL && rectangle_overlaps_region(L, X, B, Y, region))
-      search(elm[SW], L, X, B, Y, region, found);
+      search(elm[SW], L, X, B, Y, region, found, in_region, rectangle_overlaps_region);
     if (elm[SE] != NULL && rectangle_overlaps_region(X, R, B, Y, region))
-      search(elm[SE], X, R, B, Y, region, found);
+      search(elm[SE], X, R, B, Y, region, found, in_region, rectangle_overlaps_region);
     return 0;
 }
 
@@ -56,12 +60,12 @@ int
 regionsearch(struct Node *P, double L, double R, double B, double T,
              void found(struct Node *))
 {
-    struct Region region;
+    struct Rectangle region;
     region.L = L;
     region.R = R;
     region.B = B;
     region.T = T;
-    return search(P, L, R, B, T, &region, found);
+    return search(P, L, R, B, T, &region, found, in_rectangle, rectangle_overlaps_rectangle);
 }
 
 struct Node *
@@ -88,32 +92,35 @@ compare(struct Node *a, struct Node *b)
 }
 
 static int
-in_region(double x, double y, struct Region *region)
+in_rectangle(double x, double y, void *p)
 {
     double BP;
     double LP;
     double RP;
     double TP;
-
-    BP = region->B;
-    LP = region->L;
-    RP = region->R;
-    TP = region->T;
+    struct Rectangle *rectangle;
+    
+    rectangle = p;
+    BP = rectangle->B;
+    LP = rectangle->L;
+    RP = rectangle->R;
+    TP = rectangle->T;
     return LP <= x && x <= RP && BP <= y && y <= TP;
 }
 
 static int
-rectangle_overlaps_region(double L, double R, double B, double T,
-                          struct Region *region)
+rectangle_overlaps_rectangle(double L, double R, double B, double T, void *p)
 {
     double BP;
     double LP;
     double RP;
     double TP;
-
-    BP = region->B;
-    LP = region->L;
-    RP = region->R;
-    TP = region->T;
+    struct Rectangle *rectangle;
+    
+    rectangle = p;
+    BP = rectangle->B;
+    LP = rectangle->L;
+    RP = rectangle->R;
+    TP = rectangle->T;
     return L <= RP && R >= LP && B <= TP && T >= BP;
 }
