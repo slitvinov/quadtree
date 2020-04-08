@@ -2,7 +2,8 @@
 
 Point Quadtrees implementation following [FinkelBentley]
 
-<p align="center"><img src="img/fig.svg"/></p>
+<p align="center"><img src="img/rectangle.svg"/></p>
+<p align="center"><img src="img/circle.svg"/></p>
 
 # Install
 

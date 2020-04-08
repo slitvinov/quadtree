@@ -39,7 +39,7 @@
 	  <feComposite in='SourceGraphic' in2='grey' operator='atop'/>
 	</filter>
 </defs>
-<g fill="none" color="white" stroke="black" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
+<g fill="none" color="white" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
 </g>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
 	<path stroke='black'  d='M101.5,444.0 L110.5,444.0 M527.4,444.0 L518.4,444.0  '/>	<g transform="translate(93.2,447.9)" stroke="none" fill="black" font-family="Arial" font-size="12.00"  text-anchor="end">
@@ -157,7 +157,7 @@
 	<path stroke='black'  d='M101.5,18.1 L101.5,444.0 L527.4,444.0 L527.4,18.1 L101.5,18.1 Z  '/></g>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
 </g>
-	<g id="gnuplot_plot_1" ><title>"data/fig.points"</title>
+	<g id="gnuplot_plot_1" ><title>"data/points"</title>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
 	<use xlink:href='#gpPt5' transform='translate(206.9,408.9) scale(4.50)' color='rgb(148,   0, 211)'/>
 	<use xlink:href='#gpPt5' transform='translate(257.6,86.5) scale(4.50)' color='rgb(148,   0, 211)'/>
@@ -5161,7 +5161,7 @@
 	<use xlink:href='#gpPt5' transform='translate(212.6,197.9) scale(4.50)' color='rgb(148,   0, 211)'/>
 </g>
 	</g>
-	<g id="gnuplot_plot_2" ><title>"&lt;./main data/fig.points data/fig.query"</title>
+	<g id="gnuplot_plot_2" ><title>"&lt;./rectangle data/points data/rectangle.query"</title>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
 	<use xlink:href='#gpPt5' transform='translate(325.2,261.7) scale(4.50)' color='rgb(  0, 158, 115)'/>
 	<use xlink:href='#gpPt5' transform='translate(326.1,226.8) scale(4.50)' color='rgb(  0, 158, 115)'/>

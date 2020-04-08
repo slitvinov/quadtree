@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <quadtree.h>
 
-static const char *me = "fig";
+static const char *me = "circle";
 enum { SIZE = 999 };
 
 static void
@@ -24,10 +24,7 @@ main(int argc, char **argv)
     struct Node **node;
     double x;
     double y;
-    double L;
-    double R;
-    double B;
-    double T;
+    double r;
     char line[SIZE];
 
     while (*++argv != NULL && argv[0][0] == '-')
@@ -78,12 +75,12 @@ main(int argc, char **argv)
         exit(1);
     }
     while (fgets(line, SIZE, f) != NULL) {
-        if (sscanf(line, "%lf %lf %lf %lf\n", &L, &R, &B, &T) != 4) {
+        if (sscanf(line, "%lf %lf %lf\n", &x, &y, &r) != 3) {
             fprintf(stderr, "%s: fail to parse '%s' in '%s'\n", me, line,
                     argv[1]);
             exit(1);
         }
-        regionsearch(node[0], L, R, B, T, found);
+        circle_search(node[0], x, y, r, found);
     }
     fclose(f);
 

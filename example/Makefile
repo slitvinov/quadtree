@@ -5,7 +5,8 @@ M_CFLAGS = -I../lib
 M_LDFLAGS = -L../lib -lquadtree
 
 M = \
-main\
+rectangle\
+circle\
 
 all: $M
 .c.o:; $(CC) -c $(CFLAGS) $(M_CFLAGS) $<
